@@ -1,0 +1,608 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- ==============================================
+     HERO SECTION
+     ============================================== -->
+<section class="hero-section" id="home">
+    <div class="hero-container">
+        <!-- Left Column: Typography & Story -->
+        <div class="hero-content">
+            <div class="hero-eyebrow animate-slide-up">
+                <span class="hero-greeting">HELLO, I'M</span>
+                <span class="eyebrow-badge">
+                    <span class="pulse-dot"></span>
+                    <span>Available for Opportunities</span>
+                </span>
+            </div>
+
+            <h1 class="hero-title animate-slide-up delay-1">
+                {{ data.personal.name }}
+            </h1>
+            
+            <p class="hero-role-title animate-slide-up delay-2">
+                Software Engineer <span class="dot-sep">&middot;</span> R&amp;D <span class="dot-sep">&middot;</span> AI/ML <span class="dot-sep">&middot;</span> RAG <span class="dot-sep">&middot;</span> QA Automation
+            </p>
+
+            <div class="hero-statement-box animate-slide-up delay-3">
+                <p class="hero-statement-text">&ldquo;{{ data.personal.hero_statement }}&rdquo;</p>
+            </div>
+
+            <p class="hero-description animate-slide-up delay-4">
+                {{ data.personal.hero_subtext }}
+            </p>
+
+            <div class="hero-actions animate-slide-up delay-5">
+                <a href="#projects" class="btn btn-primary btn-hero">
+                    <span>View My Work</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="{{ url_for('static', filename='documents/resume.pdf') }}" class="btn btn-secondary btn-hero" download="Puja_Sharma_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download Resume</span>
+                </a>
+            </div>
+
+            <!-- Connect Row -->
+            <div class="hero-connect-row animate-slide-up delay-6">
+                <span class="connect-label">CONNECT:</span>
+                <div class="connect-links">
+                    <a href="{{ data.personal.linkedin }}" target="_blank" rel="noopener noreferrer" class="connect-link" title="LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="mailto:{{ data.personal.email }}" class="connect-link" title="Email Puja Sharma">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <div class="connect-link subtle-disabled" title="GitHub profile coming soon">
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub <small class="coming-soon-pill">Coming soon</small></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Profile Image & Refined Badges -->
+        <div class="hero-visual animate-fade-in delay-2">
+            <div class="profile-card">
+                <div class="profile-image-container">
+                    <img src="{{ url_for('static', filename=data.personal.profile_image) }}" 
+                         alt="Puja Sharma - Software Engineer" 
+                         class="profile-img"
+                         onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/profile.jpeg') }}';">
+
+                    <!-- Fallback placeholder if image load completely fails -->
+                    <div class="profile-placeholder" aria-hidden="true">
+                        <div class="placeholder-avatar">
+                            <span>PS</span>
+                        </div>
+                        <span class="placeholder-name">Puja Sharma</span>
+                        <span class="placeholder-sub">Software Engineer &bull; R&amp;D</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     STATISTICS SECTION
+     ============================================== -->
+<section class="stats-section" id="stats">
+    <div class="stats-container">
+        <div class="stats-grid">
+            {% for stat in data.stats %}
+            <div class="stat-card" data-reveal>
+                <div class="stat-value-row">
+                    <span class="stat-value">{{ stat.value }}</span>
+                </div>
+                <h3 class="stat-label">{{ stat.label }}</h3>
+                <p class="stat-detail">{{ stat.detail }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     ABOUT SECTION
+     ============================================== -->
+<section class="section about-section" id="about">
+    <div class="section-container">
+        <div class="about-two-col-layout">
+            <!-- Left Column: Large Heading -->
+            <div class="about-col-left" data-reveal>
+                <span class="section-eyebrow">Professional Philosophy</span>
+                <h2 class="about-main-heading">
+                    Engineering with a Quality-First Mindset
+                </h2>
+                <div class="about-left-accent-line"></div>
+                
+                <div class="about-experience-bridge">
+                    <span class="bridge-tag">Evolution</span>
+                    <p class="bridge-text">QA &rarr; Automation &rarr; R&amp;D &rarr; AI/ML &rarr; Software Engineering</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Narrative Story & Highlight Statement -->
+            <div class="about-col-right" data-reveal>
+                <p class="about-story-text">
+                    {{ data.personal.about_story }}
+                </p>
+
+                <!-- Highlight Statement Banner -->
+                <div class="about-statement-banner">
+                    <div class="statement-accent-bar"></div>
+                    <div class="statement-content">
+                        <i class="fa-solid fa-quote-left statement-quote-icon"></i>
+                        <p class="statement-text">&ldquo;{{ data.personal.about_highlight }}&rdquo;</p>
+                    </div>
+                </div>
+
+                <div class="about-key-tenets">
+                    <div class="tenet-item">
+                        <div class="tenet-icon"><i class="fa-solid fa-shield-check"></i></div>
+                        <div>
+                            <h4>Validation &amp; Reliability</h4>
+                            <p>Rigorous test suite design, API contract checking, and edge case coverage prevent regressions in production.</p>
+                        </div>
+                    </div>
+
+                    <div class="tenet-item">
+                        <div class="tenet-icon"><i class="fa-solid fa-brain"></i></div>
+                        <div>
+                            <h4>Grounded AI &amp; RAG</h4>
+                            <p>Applying Retrieval-Augmented Generation with strict context grounding and document parsing for real-world tasks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     EXPERIENCE TIMELINE SECTION
+     ============================================== -->
+<section class="section experience-section bg-subtle" id="experience">
+    <div class="section-container">
+        <div class="section-header" data-reveal>
+            <span class="section-eyebrow">Career Timeline</span>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtext">A purposeful transition from quality assurance &amp; automation to R&amp;D and intelligent software systems.</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- Career Pathway Progression Strip -->
+        <div class="career-pathway-strip" data-reveal>
+            <div class="path-node">
+                <span class="path-year">2024</span>
+                <span class="path-title">QA Intern</span>
+                <span class="path-sub">Manual &amp; API Testing</span>
+            </div>
+            <div class="path-transition-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="path-node">
+                <span class="path-year">2024–2025</span>
+                <span class="path-title">UI &amp; API Automation</span>
+                <span class="path-sub">Appium &bull; Python Testing</span>
+            </div>
+            <div class="path-transition-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="path-node active">
+                <span class="path-year">2025–Present</span>
+                <span class="path-title">Developer &ndash; R&amp;D</span>
+                <span class="path-sub">RAG &bull; AI/ML &bull; Qualcomm SDK</span>
+            </div>
+            <div class="path-transition-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="path-node future">
+                <span class="path-year">Continuous</span>
+                <span class="path-title">Software Engineering</span>
+                <span class="path-sub">Reliable AI Systems</span>
+            </div>
+        </div>
+
+        <!-- Vertical Timeline Cards -->
+        <div class="timeline-container">
+            {% for job in data.experience %}
+            <div class="timeline-row" data-reveal>
+                <div class="timeline-meta-col">
+                    <span class="timeline-year-badge">{{ job.year }}</span>
+                    <span class="timeline-period-text">{{ job.period }}</span>
+                </div>
+
+                <div class="timeline-spine">
+                    <div class="spine-dot {% if 'Present' in job.period %}active-pulse{% endif %}"></div>
+                    <div class="spine-line"></div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <div>
+                            <h3 class="timeline-job-role">{{ job.role }}</h3>
+                            <h4 class="timeline-company-name">
+                                <i class="fa-regular fa-building"></i> {{ job.company }}
+                            </h4>
+                        </div>
+                        <div class="timeline-badges">
+                            <span class="badge-stage">{{ job.stage }}</span>
+                            <span class="badge-status">{{ job.status }}</span>
+                        </div>
+                    </div>
+
+                    <ul class="timeline-task-list">
+                        {% for resp in job.responsibilities %}
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>{{ resp }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     WORK PROCESS SECTION
+     ============================================== -->
+<section class="section process-section" id="process">
+    <div class="section-container">
+        <div class="section-header" data-reveal>
+            <span class="section-eyebrow">Methodology</span>
+            <h2 class="section-title">How I Approach Engineering</h2>
+            <p class="section-subtext">Four clear stages combining quality assurance precision with software development agility.</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="process-cards-grid">
+            {% for item in data.process %}
+            <div class="process-card" data-reveal>
+                <div class="process-card-top">
+                    <span class="process-step-num">{{ item.step }}</span>
+                    <div class="process-step-icon">
+                        <i class="{{ item.icon }}"></i>
+                    </div>
+                </div>
+                <h3 class="process-card-title">{{ item.title }}</h3>
+                <p class="process-card-desc">{{ item.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     PROJECTS SECTION (VISUAL FOCUS - MIXED LAYOUT)
+     ============================================== -->
+<section class="section projects-section bg-subtle" id="projects">
+    <div class="section-container">
+        <div class="section-header" data-reveal>
+            <span class="section-eyebrow">Featured Work</span>
+            <h2 class="section-title">Projects &amp; Systems</h2>
+            <p class="section-subtext">Practical systems combining AI/ML, document pipelines, test automation, and exploratory R&amp;D.</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-showcase">
+            <!-- Project 1: Featured Large Hero Card -->
+            {% set p1 = data.projects[0] %}
+            <article class="project-featured-card" data-reveal id="{{ p1.id }}">
+                <div class="featured-media-area">
+                    <img src="{{ url_for('static', filename=p1.image) }}" 
+                         alt="{{ p1.title }} preview" 
+                         class="project-showcase-img"
+                         onerror="this.onerror=null; this.parentElement.classList.add('show-fallback');">
+                    <div class="project-media-fallback" aria-hidden="true">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span>{{ p1.title }}</span>
+                    </div>
+                </div>
+
+                <div class="featured-info-area">
+                    <div class="project-top-row">
+                        <span class="project-cat-pill">{{ p1.category }}</span>
+                        <span class="project-repo-badge"><i class="fa-solid fa-shield-halved"></i> {{ p1.repo_type }}</span>
+                    </div>
+
+                    <h3 class="project-main-title">{{ p1.title }}</h3>
+                    <p class="project-main-desc">{{ p1.short_desc }}</p>
+
+                    <div class="project-tech-pills">
+                        {% for tech in p1.technologies %}
+                        <span class="tech-pill">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="project-cta-row">
+                        <button class="btn btn-primary btn-sm view-case-study-btn" 
+                                data-project='{{ p1 | tojson }}'
+                                aria-label="View case study for {{ p1.title }}">
+                            <span>View Case Study</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <span class="cta-note">{{ p1.repo_type }}</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Projects 2, 3, 4: Medium Grid Cards -->
+            <div class="projects-subgrid">
+                {% for proj in data.projects[1:] %}
+                <article class="project-medium-card" data-reveal id="{{ proj.id }}">
+                    <div class="medium-media-area">
+                        <img src="{{ url_for('static', filename=proj.image) }}" 
+                             alt="{{ proj.title }} preview" 
+                             class="project-showcase-img"
+                             onerror="this.onerror=null; this.parentElement.classList.add('show-fallback');">
+                        <div class="project-media-fallback" aria-hidden="true">
+                            {% if 'OCR' in proj.category %}
+                            <i class="fa-solid fa-file-invoice"></i>
+                            {% elif 'Automation' in proj.category %}
+                            <i class="fa-solid fa-vial-circle-check"></i>
+                            {% else %}
+                            <i class="fa-solid fa-microchip"></i>
+                            {% endif %}
+                            <span>{{ proj.title }}</span>
+                        </div>
+                    </div>
+
+                    <div class="medium-info-area">
+                        <div class="project-top-row">
+                            <span class="project-cat-pill">{{ proj.category }}</span>
+                        </div>
+
+                        <h3 class="project-sub-title">{{ proj.title }}</h3>
+                        <p class="project-sub-desc">{{ proj.short_desc }}</p>
+
+                        <div class="project-tech-pills">
+                            {% for tech in proj.technologies %}
+                            <span class="tech-pill">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="project-cta-row">
+                            <button class="btn btn-outline btn-sm view-case-study-btn" 
+                                    data-project='{{ proj | tojson }}'
+                                    aria-label="View case study for {{ proj.title }}">
+                                <span>View Project &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     SKILLS SECTION
+     ============================================== -->
+<section class="section skills-section" id="skills">
+    <div class="section-container">
+        <div class="section-header" data-reveal>
+            <span class="section-eyebrow">Technical Competencies</span>
+            <h2 class="section-title">Skills &amp; Capabilities</h2>
+            <p class="section-subtext">Practical tools and engineering disciplines organized for clear recruiter review.</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="skills-grid-clean">
+            {% for category, items in data.skills.items() %}
+            <div class="skills-group-card" data-reveal>
+                <div class="skills-group-header">
+                    <div class="skills-group-icon">
+                        {% if category == 'Programming' %}
+                        <i class="fa-solid fa-code"></i>
+                        {% elif category == 'AI / ML' %}
+                        <i class="fa-solid fa-brain"></i>
+                        {% elif category == 'Document Intelligence' %}
+                        <i class="fa-solid fa-file-lines"></i>
+                        {% elif category == 'Vector / Data' %}
+                        <i class="fa-solid fa-database"></i>
+                        {% elif category == 'Testing' %}
+                        <i class="fa-solid fa-circle-check"></i>
+                        {% elif category == 'Edge AI' %}
+                        <i class="fa-solid fa-microchip"></i>
+                        {% else %}
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        {% endif %}
+                    </div>
+                    <h3 class="skills-group-title">{{ category }}</h3>
+                </div>
+
+                <div class="skills-pills-container">
+                    {% for item in items %}
+                    <span class="clean-skill-pill">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     EDUCATION & CERTIFICATIONS SECTION
+     ============================================== -->
+<section class="section education-section bg-subtle" id="education">
+    <div class="section-container">
+        <div class="edu-certs-layout">
+            <!-- Education Column -->
+            <div class="edu-card-wrap" data-reveal>
+                <div class="section-header align-left">
+                    <span class="section-eyebrow">Academic Background</span>
+                    <h2 class="section-title">Education &amp; Honors</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="academic-award-card">
+                    <div class="academic-top-bar">
+                        <span class="academic-timeline"><i class="fa-regular fa-calendar"></i> {{ data.education.period }}</span>
+                        <span class="academic-cgpa"><i class="fa-solid fa-star"></i> CGPA: {{ data.education.cgpa }}</span>
+                    </div>
+
+                    <h3 class="academic-degree-title">{{ data.education.degree }}</h3>
+                    <h4 class="academic-institution">
+                        <i class="fa-solid fa-graduation-cap"></i> {{ data.education.institution }}
+                    </h4>
+                    <p class="academic-location"><i class="fa-solid fa-location-dot"></i> {{ data.education.location }}</p>
+
+                    <div class="academic-honors-list">
+                        {% for honor in data.education.honors %}
+                        <div class="gold-honor-badge">
+                            <i class="fa-solid fa-award"></i>
+                            <span>{{ honor }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications Column -->
+            <div class="cert-card-wrap" data-reveal>
+                <div class="section-header align-left">
+                    <span class="section-eyebrow">Verified Credentials</span>
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="certs-stack">
+                    {% for cert in data.certifications %}
+                    <div class="cert-item-row">
+                        <div class="cert-item-icon">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <div class="cert-item-details">
+                            <h3 class="cert-item-name">{{ cert.name }}</h3>
+                            <p class="cert-item-issuer">Issued by <strong>{{ cert.issuer }}</strong></p>
+                        </div>
+                        <span class="cert-item-verified">Verified</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     CURRENTLY EXPLORING SECTION
+     ============================================== -->
+<section class="section exploring-section" id="exploring">
+    <div class="section-container">
+        <div class="exploring-card" data-reveal>
+            <div class="exploring-head">
+                <span class="exploring-badge">
+                    <span class="pulse-dot"></span>
+                    Continuous Learning
+                </span>
+                <h2 class="exploring-title">Currently Exploring &amp; Researching</h2>
+                <p class="exploring-subtitle">&ldquo;Always learning, experimenting and building.&rdquo;</p>
+            </div>
+
+            <div class="exploring-pills-row">
+                {% for topic in data.currently_exploring %}
+                <div class="exploring-pill">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>{{ topic }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================
+     CONTACT SECTION
+     ============================================== -->
+<section class="section contact-section bg-subtle" id="contact">
+    <div class="section-container">
+        <div class="section-header" data-reveal>
+            <span class="section-eyebrow">Get in Touch</span>
+            <h2 class="section-title">Let's Build Something Meaningful.</h2>
+            <p class="section-subtext">I'm open to opportunities, collaborations and conversations around software engineering, AI/ML, RAG and applied technology.</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="contact-layout">
+            <!-- Direct Channels Card -->
+            <div class="contact-channels-card" data-reveal>
+                <h3>Direct Channels</h3>
+                <p>Reach out directly for roles, projects, or technical conversations.</p>
+
+                <div class="channel-items">
+                    <a href="mailto:{{ data.personal.email }}" class="channel-item">
+                        <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="channel-info">
+                            <span class="channel-label">Email</span>
+                            <span class="channel-value">{{ data.personal.email }}</span>
+                        </div>
+                    </a>
+
+                    <a href="{{ data.personal.linkedin }}" target="_blank" rel="noopener noreferrer" class="channel-item">
+                        <div class="channel-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                        <div class="channel-info">
+                            <span class="channel-label">LinkedIn</span>
+                            <span class="channel-value">{{ data.personal.linkedin_display }}</span>
+                        </div>
+                    </a>
+
+                    <div class="channel-item no-link">
+                        <div class="channel-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="channel-info">
+                            <span class="channel-label">Location</span>
+                            <span class="channel-value">{{ data.personal.location }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-direct-actions">
+                    <a href="mailto:{{ data.personal.email }}" class="btn btn-primary btn-block btn-lg">
+                        <span>Let's Connect &rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Message Form -->
+            <div class="contact-form-card" data-reveal>
+                <form id="contactForm" class="contact-form-inner" novalidate>
+                    <h3>Send a Direct Note</h3>
+                    <p class="form-sub-note">Leave your details and message below:</p>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="name">Your Name <span class="req">*</span></label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Your Email <span class="req">*</span></label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="e.g. alex@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input" placeholder="e.g. Software Engineer Opportunity / RAG System">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Message <span class="req">*</span></label>
+                        <textarea id="message" name="message" rows="4" class="form-input" placeholder="Describe the opportunity, technical topic, or collaboration..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary btn-block" id="formSubmitBtn">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        <span id="btnText">Send Note</span>
+                    </button>
+
+                    <div id="formStatus" class="form-status-alert" role="alert" aria-live="polite"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
